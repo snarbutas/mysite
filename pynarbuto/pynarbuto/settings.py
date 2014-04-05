@@ -9,6 +9,12 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+try:
+    import pymysql
+    pymysql.install_as_MySQLdb()
+except ImportError:
+    pass
+
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -36,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,8 +64,12 @@ WSGI_APPLICATION = 'pynarbuto.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'pynarbutodb',
+        'USER': 'pynarbuto',
+        'PASSWORD': '(IJN*UHB',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 
